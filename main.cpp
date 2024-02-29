@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include "header.hpp"
+#include "graph_header.hpp"
+
 using namespace std;
 
 /* Makespan: reduzir ao máximo o tempo total necessário para
@@ -23,6 +25,8 @@ Parte 2:
 
 int main()
 {
-  cout << "Hello World!";
+  Graph g(5);
+  g.initializeGraph(g);
+  g.printGraph();
   return 0;
 }

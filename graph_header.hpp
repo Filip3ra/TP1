@@ -4,12 +4,12 @@
 class Graph
 {
 private:
-  int V;
+  int N; // Número de vértices do grafo
   std::vector<std::vector<int>> adj;
 
 public:
-  Graph(int V);
-  void addEdge(int v, int w);
+  Graph(int n);
+  void addEdge(int a, int b);
   void printGraph();
-  void initializeGraph(Graph g);
+  void initializeGraph(Graph &g);
 };

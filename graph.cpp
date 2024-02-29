@@ -1,33 +1,32 @@
 #include "graph_header.hpp"
 #include <iostream>
 
-Graph::Graph(int V)
+// Construtor
+Graph::Graph(int n)
 {
-  this->V = V;
-  adj.resize(V);
+  this->N = n;
+  adj.resize(n);
 }
 
-void Graph::addEdge(int v, int w)
+void Graph::addEdge(int a, int b)
 {
-  adj[v].push_back(w);
-  adj[w].push_back(v); // Uncomment this line if it's an undirected graph
+  adj[a].push_back(b);
+  // adj[b].push_back(a); // Comente essa linha se for um grafo direcionado
 }
 
 void Graph::printGraph()
 {
-  for (int v = 0; v < V; ++v)
+  for (int v = 0; v < N; ++v)
   {
-    std::cout << "Adjacency list of vertex " << v << "\n";
-    std::cout << "head";
-    for (auto x : adj[v])
+    std::cout << "[" << v << "]";
+    for (unsigned x : adj[v]) //
       std::cout << " -> " << x;
     std::cout << std::endl;
   }
 }
 
-void Graph::initializeGraph(Graph g)
+void Graph::initializeGraph(Graph &g)
 {
-  Graph g(5);
   g.addEdge(0, 1);
   g.addEdge(0, 4);
   g.addEdge(1, 2);
@@ -35,6 +34,6 @@ void Graph::initializeGraph(Graph g)
   g.addEdge(1, 4);
   g.addEdge(2, 3);
   g.addEdge(3, 4);
-
-  g.printGraph();
 }
+
+/* Implementar um destrutor depois ? */
