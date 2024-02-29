@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "header.hpp"
 using namespace std;
 
@@ -14,6 +15,10 @@ em ordem específica. Cada operação de um trabalho deve ser processada
 em uma máquina particular, e cada máquina só pode processar uma
 operação de cada vez.
 
+Parte 1: Implementar um algoritmo de percorrimento topológico para
+percorrer o grafo do trabalho.
+
+Parte 2:
 */
 
 int main()
