@@ -1,0 +1,31 @@
+#include <utility>
+Permite usar a função Pair, uma estrutura em par que é 
+basicamente um array de duas posições.
+
+x = [first, second]
+
+Se declara pair x; então consigo acessar os valores 
+com a sintaxe x.first e x.second; 
+
+----------------------------------------------------------
+
+"auto" faz com que o compilador decida o tipo que a variável
+deve ter com base do que ela recebe de atribuição. 
+
+auto x = 5; // x será do tipo int
+auto y = 3.14; // y será do tipo double
+auto z = "Hello"; // z será do tipo const char*
+
+----------------------------------------------------------
+
+  vector<vector<pair<int, int>>> adjList;
+  Se trata de um vector de vector de pares:
+
+  [0]->[(1,20) | (2,10) | (3,40)]
+  [1]-> //
+  [2]->[(3,15) | (4,8)]
+  [3]->[(2,6)]
+  [4]-> //
+
+
+
