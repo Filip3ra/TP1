@@ -1,15 +1,18 @@
 #pragma once
 #include <vector>
+#include <utility>
+
+using namespace std;
 
 class Graph
 {
 private:
   int N; // Número de vértices do grafo
-  std::vector<std::vector<int>> adj;
+  vector<vector<pair<int, int>>> adjList;
 
 public:
   Graph(int n);
-  void addEdge(int a, int b);
+  void addEdge(int a, int b, int weight);
   void printGraph();
   void initializeGraph(Graph &g);
 };

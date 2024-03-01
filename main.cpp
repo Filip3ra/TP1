@@ -25,7 +25,7 @@ Parte 2:
 
 int main()
 {
-  Graph g(5);
+  Graph g(17);
   g.initializeGraph(g);
   g.printGraph();
   return 0;
