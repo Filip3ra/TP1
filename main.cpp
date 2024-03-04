@@ -32,11 +32,7 @@ int main()
   g.printGraph();
 
   vector<int> degrees = g.calculateDegree();
-
-  for (int v = 0; v < degrees.size(); ++v)
-  {
-    cout << "Grau do vertice " << v << ": " << degrees[v] << endl;
-  }
+  g.printGraphDegree(degrees);
 
   return 0;
 }
