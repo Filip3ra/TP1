@@ -46,6 +46,14 @@ void Graph::printGraph()
   }
 }
 
+void Graph::initializeJobSuccessors(Graph &g)
+{
+}
+
+void Graph::initializeMachineSuccessors(Graph &g)
+{
+}
+
 void Graph::initializeGraph(Graph &g)
 {
   g.addEdge(1, 11, 0);

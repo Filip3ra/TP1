@@ -16,5 +16,7 @@ public:
   void printGraph();
   void printGraphDegree(const vector<int> &degrees);
   void initializeGraph(Graph &g);
+  void initializeJobSuccessors(Graph &g);
+  void initializeMachineSuccessors(Graph &g);
   vector<int> calculateDegree();
 };
