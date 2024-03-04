@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 #include "header.hpp"
 #include "graph_header.hpp"
 
@@ -25,8 +26,17 @@ Parte 2:
 
 int main()
 {
-  Graph g(17);
+  int n = 17;
+  Graph g(n);
   g.initializeGraph(g);
   g.printGraph();
+
+  vector<int> degrees = g.calculateDegree();
+
+  for (int v = 0; v < degrees.size(); ++v)
+  {
+    cout << "Grau do vertice " << v << ": " << degrees[v] << endl;
+  }
+
   return 0;
 }

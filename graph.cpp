@@ -11,7 +11,7 @@ Graph::Graph(int n)
 
 void Graph::addEdge(int a, int b, int weight)
 {
-  adjList[a].push_back(make_pair(b, weight)); // a-->[b, weight]
+  adjList[a].push_back(make_pair(b, weight)); // a---[b, weight]
 }
 
 void Graph::printGraph()
@@ -23,6 +23,19 @@ void Graph::printGraph()
       cout << " --> {" << x.first << "," << x.second << "}";
     cout << endl;
   }
+}
+
+vector<int> Graph::calculateDegree()
+{
+  vector<int> degrees(N, 0); // Inicializa o vetor de graus com 0 para cada vértice
+  for (int v = 0; v < N; ++v)
+  {
+    for (auto edge : adjList[v])
+    {
+      degrees[edge.first]++; // Incrementa o grau do vértice v para cada aresta incidente
+    }
+  }
+  return degrees;
 }
 
 void Graph::initializeGraph(Graph &g)
@@ -47,11 +60,12 @@ void Graph::initializeGraph(Graph &g)
   g.addEdge(9, 12, 2);
   g.addEdge(10, 13, 10);
   g.addEdge(10, 15, 10);
+  g.addEdge(11, 7, 4);
   g.addEdge(11, 14, 4);
   g.addEdge(12, 14, 12);
   g.addEdge(12, 15, 12);
   g.addEdge(13, 16, 6);
-  g.addEdge(14, 6, 2);
+  g.addEdge(14, 13, 2);
   g.addEdge(14, 16, 2);
   g.addEdge(15, 16, 9);
 }
