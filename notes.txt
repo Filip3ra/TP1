@@ -27,5 +27,24 @@ auto z = "Hello"; // z será do tipo const char*
   [3]->[(2,6)]
   [4]-> //
 
+----------------------------------------------------------
 
+
+vector<int> Graph::calculateDegree()
+{
+  vector<int> degrees(N, 0); // Inicializa o vetor de graus com 0 para cada vértice
+  for (int v = 0; v < N; ++v)
+  {
+    for (auto edge : adjList[v])
+    {
+      degrees[edge.first]++; // Incrementa o grau do vértice v para cada aresta incidente
+    }
+  }
+  return degrees;
+}
+
+Com estou implementando com pares, o que ocorre aqui é que edge irá
+acessar os elementos da estrutura pair através das funções "first" e "second".
+Como quero contar somente as arestas de incidência basta acessar 
+a posição do vector com o parâmetro "first".
 
