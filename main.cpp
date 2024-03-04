@@ -27,12 +27,10 @@ Parte 2:
 int main()
 {
   int n = 17;
-  Graph g(n);
-  g.initializeGraph(g);
-  g.printGraph();
+  int m = 0;
+  Graph g(n, m);
 
-  vector<int> degrees = g.calculateDegree();
-  g.printGraphDegree(degrees);
+  g.initializeJobSuccessors(g);
 
   return 0;
 }

@@ -16,9 +16,9 @@ private:
 
 public:
   Graph(int n, int m);
-  void SJ_addEdge(int a);
-  void SM_addEdge(int a);
-  void printGraph();
+  void SJ_addEdge(int a, int b);
+  void SM_addEdge(int a, int b);
+  void printGraph(vector<unsigned> &vec);
   void printGraphDegree(const vector<int> &degrees);
   void initializeGraph(Graph &g);
   void initializeJobSuccessors(Graph &g);

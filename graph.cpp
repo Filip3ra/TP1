@@ -15,31 +15,37 @@ Graph::Graph(int n, int m)
 
 /*como fazer uma função generica que, independente do vector
 passado ele sempre irá adicionar o elementos */
-void Graph::SJ_addEdge(int a)
+void Graph::SJ_addEdge(int a, int b)
 {
-  successorJob.push_back(a);
+  successorJob[a] = b;
 }
 
-void Graph::SM_addEdge(int a)
+void Graph::SM_addEdge(int a, int b)
 {
-  successorMachine.push_back(a);
+  successorMachine[a] = b;
 }
 
-void Graph::printGraph()
+void Graph::printGraph(vector<unsigned> &vec)
 {
-  /*
+
   for (int v = 0; v < N; ++v)
   {
-    cout << "[" << v << "]";
-    for (auto x : adjList[v]) // "auto" Escolhe automaticamente o tipo de x
-      cout << " --> {" << x.first << "," << x.second << "}";
-    cout << endl;
+    cout << "[" << v << "] --> " << vec[v];
   }
-  */
 }
 
 void Graph::initializeJobSuccessors(Graph &g)
 {
+  g.SJ_addEdge(7, 10);
+  g.SJ_addEdge(10, 3);
+  g.SJ_addEdge(1, 3);
+  g.SJ_addEdge(1, 2);
+  g.SJ_addEdge(8, 14);
+  g.SJ_addEdge(14, 5);
+  g.SJ_addEdge(11, 15);
+  g.SJ_addEdge(15, 9);
+  g.SJ_addEdge(12, 13);
+  g.SJ_addEdge(13, 6);
 }
 
 void Graph::initializeMachineSuccessors(Graph &g)
