@@ -7,12 +7,17 @@ using namespace std;
 class Graph
 {
 private:
-  int N; // Número de vértices do grafo
-  vector<vector<pair<int, int>>> adjList;
+  unsigned N;
+  unsigned M;
+  vector<unsigned> successorJob;
+  vector<unsigned> successorMachine;
+  vector<unsigned> time;
+  // vector<vector<pair<int, int>>> adjList;
 
 public:
-  Graph(int n);
-  void addEdge(int a, int b, int weight);
+  Graph(int n, int m);
+  void SJ_addEdge(int a);
+  void SM_addEdge(int a);
   void printGraph();
   void printGraphDegree(const vector<int> &degrees);
   void initializeGraph(Graph &g);
