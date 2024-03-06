@@ -31,6 +31,10 @@ int main()
   Graph g(n, m);
 
   g.initializeJobSuccessors(g);
+  g.initializeMachineSuccessors(g);
+  g.printSJ();
+  cout << "sucessores de maquinas: " << endl;
+  g.printSM();
 
   return 0;
 }

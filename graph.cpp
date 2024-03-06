@@ -10,50 +10,67 @@ Graph::Graph(int n, int m)
   time.resize(n);
   successorJob.resize(n);
   successorMachine.resize(n);
-  // adjList.resize(n);
 }
 
-/*como fazer uma função generica que, independente do vector
-passado ele sempre irá adicionar o elementos */
-void Graph::SJ_addEdge(int a, int b)
+void Graph::addEdge(vector<unsigned> &vec, int a, int b)
 {
-  successorJob[a] = b;
+  vec[a] = b;
 }
 
-void Graph::SM_addEdge(int a, int b)
+int Graph::getJobSuccessor(int a)
 {
-  successorMachine[a] = b;
+  return successorJob[a];
 }
 
-void Graph::printGraph(vector<unsigned> &vec)
+int Graph::getMachineSuccessor(int a)
 {
+  return successorMachine[a];
+}
 
+void Graph::printSJ()
+{
   for (int v = 0; v < N; ++v)
   {
-    cout << "[" << v << "] --> " << vec[v];
+    cout << "[" << v << "] --> " << successorJob[v] << endl;
+  }
+}
+
+void Graph::printSM()
+{
+  for (int v = 0; v < N; ++v)
+  {
+    cout << "[" << v << "] --> " << successorMachine[v] << endl;
   }
 }
 
 void Graph::initializeJobSuccessors(Graph &g)
 {
-  g.SJ_addEdge(7, 10);
-  g.SJ_addEdge(10, 3);
-  g.SJ_addEdge(1, 3);
-  g.SJ_addEdge(1, 2);
-  g.SJ_addEdge(8, 14);
-  g.SJ_addEdge(14, 5);
-  g.SJ_addEdge(11, 15);
-  g.SJ_addEdge(15, 9);
-  g.SJ_addEdge(12, 13);
-  g.SJ_addEdge(13, 6);
+  g.addEdge(successorJob, 7, 10);
+  g.addEdge(successorJob, 10, 3);
+  g.addEdge(successorJob, 4, 1);
+  g.addEdge(successorJob, 1, 2);
+  g.addEdge(successorJob, 8, 14);
+  g.addEdge(successorJob, 14, 5);
+  g.addEdge(successorJob, 11, 15);
+  g.addEdge(successorJob, 15, 9);
+  g.addEdge(successorJob, 12, 13);
+  g.addEdge(successorJob, 13, 6);
 }
 
 void Graph::initializeMachineSuccessors(Graph &g)
 {
-}
-
-void Graph::initializeGraph(Graph &g)
-{
+  g.addEdge(successorMachine, 7, 8);
+  g.addEdge(successorMachine, 8, 2);
+  g.addEdge(successorMachine, 2, 12);
+  g.addEdge(successorMachine, 12, 9);
+  g.addEdge(successorMachine, 10, 1);
+  g.addEdge(successorMachine, 1, 11);
+  g.addEdge(successorMachine, 11, 14);
+  g.addEdge(successorMachine, 14, 13);
+  g.addEdge(successorMachine, 4, 3);
+  g.addEdge(successorMachine, 3, 5);
+  g.addEdge(successorMachine, 5, 15);
+  g.addEdge(successorMachine, 15, 6);
 }
 
 /* Implementar um destrutor depois ? */

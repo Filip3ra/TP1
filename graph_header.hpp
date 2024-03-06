@@ -16,11 +16,12 @@ private:
 
 public:
   Graph(int n, int m);
-  void SJ_addEdge(int a, int b);
+  void addEdge(vector<unsigned> &vec, int a, int b);
   void SM_addEdge(int a, int b);
-  void printGraph(vector<unsigned> &vec);
-  void printGraphDegree(const vector<int> &degrees);
-  void initializeGraph(Graph &g);
+  void printSJ();
+  void printSM();
+  int getJobSuccessor(int a);
+  int getMachineSuccessor(int a);
   void initializeJobSuccessors(Graph &g);
   void initializeMachineSuccessors(Graph &g);
   vector<int> calculateDegree();
