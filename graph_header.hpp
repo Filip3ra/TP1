@@ -12,12 +12,10 @@ private:
   vector<unsigned> successorJob;
   vector<unsigned> successorMachine;
   vector<unsigned> time;
-  // vector<vector<pair<int, int>>> adjList;
 
 public:
   Graph(int n, int m);
   void addEdge(vector<unsigned> &vec, int a, int b);
-  void SM_addEdge(int a, int b);
   void printSJ();
   void printSM();
   int getJobSuccessor(int a);

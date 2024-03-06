@@ -12,11 +12,6 @@ Graph::Graph(int n, int m)
   successorMachine.resize(n);
 }
 
-void Graph::addEdge(vector<unsigned> &vec, int a, int b)
-{
-  vec[a] = b;
-}
-
 int Graph::getJobSuccessor(int a)
 {
   return successorJob[a];
@@ -27,20 +22,9 @@ int Graph::getMachineSuccessor(int a)
   return successorMachine[a];
 }
 
-void Graph::printSJ()
+void Graph::addEdge(vector<unsigned> &vec, int a, int b)
 {
-  for (int v = 0; v < N; ++v)
-  {
-    cout << "[" << v << "] --> " << successorJob[v] << endl;
-  }
-}
-
-void Graph::printSM()
-{
-  for (int v = 0; v < N; ++v)
-  {
-    cout << "[" << v << "] --> " << successorMachine[v] << endl;
-  }
+  vec[a] = b;
 }
 
 void Graph::initializeJobSuccessors(Graph &g)
@@ -73,4 +57,19 @@ void Graph::initializeMachineSuccessors(Graph &g)
   g.addEdge(successorMachine, 15, 6);
 }
 
+void Graph::printSJ()
+{
+  for (int v = 0; v < N; ++v)
+  {
+    cout << "[" << v << "] --> " << successorJob[v] << endl;
+  }
+}
+
+void Graph::printSM()
+{
+  for (int v = 0; v < N; ++v)
+  {
+    cout << "[" << v << "] --> " << successorMachine[v] << endl;
+  }
+}
 /* Implementar um destrutor depois ? */
