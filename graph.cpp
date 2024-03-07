@@ -2,7 +2,6 @@
 #include <iostream>
 using namespace std;
 
-// Construtor
 Graph::Graph(int n, int m)
 {
   this->N = n;
@@ -10,6 +9,7 @@ Graph::Graph(int n, int m)
   time.resize(n);
   successorJob.resize(n);
   successorMachine.resize(n);
+  verticeInDegree.resize(n);
 }
 
 int Graph::getJobSuccessor(int a)
@@ -25,6 +25,12 @@ int Graph::getMachineSuccessor(int a)
 void Graph::addEdge(vector<unsigned> &vec, int a, int b)
 {
   vec[a] = b;
+  addInDegree(b);
+}
+
+void Graph::addInDegree(int b)
+{
+  verticeInDegree[b]++;
 }
 
 void Graph::initializeJobSuccessors(Graph &g)
@@ -72,4 +78,13 @@ void Graph::printSM()
     cout << "[" << v << "] --> " << successorMachine[v] << endl;
   }
 }
+
+void Graph::printInDegree()
+{
+  for (int v = 0; v < N; ++v)
+  {
+    cout << "[" << v << "] --> " << verticeInDegree[v] << endl;
+  }
+}
+
 /* Implementar um destrutor depois ? */

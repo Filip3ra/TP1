@@ -12,15 +12,17 @@ private:
   vector<unsigned> successorJob;
   vector<unsigned> successorMachine;
   vector<unsigned> time;
+  vector<unsigned> verticeInDegree;
 
 public:
   Graph(int n, int m);
   void addEdge(vector<unsigned> &vec, int a, int b);
-  void printSJ();
-  void printSM();
+  void addInDegree(int b);
   int getJobSuccessor(int a);
   int getMachineSuccessor(int a);
   void initializeJobSuccessors(Graph &g);
   void initializeMachineSuccessors(Graph &g);
-  vector<int> calculateDegree();
+  void printSJ();
+  void printSM();
+  void printInDegree();
 };

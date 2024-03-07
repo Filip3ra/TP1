@@ -26,22 +26,24 @@ Parte 2:
 
 int main()
 {
-  int n = 17;
-  int m = 0;
-  Graph g(n, m);
+     int n = 17;
+     int m = 0;
+     Graph g(n, m);
 
-  g.initializeJobSuccessors(g);
-  g.initializeMachineSuccessors(g);
-  // g.printSJ();
-  // cout << "sucessores de maquinas: " << endl;
-  // g.printSM();
+     g.initializeJobSuccessors(g);
+     g.initializeMachineSuccessors(g);
+     // g.printSJ();
+     // cout << "sucessores de maquinas: " << endl;
+     // g.printSM();
 
-  int x = 4;
-  cout << "sucessor de job de " << x << " e :"
-       << g.getJobSuccessor(4) << endl;
+     int x = 4;
+     cout << "sucessor de job de " << x << " e : "
+          << g.getJobSuccessor(4) << endl;
 
-  cout << "sucessor de maquina de " << x << " e :"
-       << g.getMachineSuccessor(4) << endl;
+     cout << "sucessor de maquina de " << x << " e : "
+          << g.getMachineSuccessor(4) << endl;
 
-  return 0;
+     g.printInDegree();
+
+     return 0;
 }
