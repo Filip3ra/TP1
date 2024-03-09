@@ -63,6 +63,7 @@ void Graph::initializeMachineSuccessors(Graph &g)
   g.addEdge(successorMachine, 15, 6);
 }
 
+// Essas funções de print são só pra testes, devo remover posteriormente
 void Graph::printSJ()
 {
   for (int v = 0; v < N; ++v)
