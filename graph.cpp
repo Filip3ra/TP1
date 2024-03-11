@@ -36,7 +36,7 @@ void Graph::addInDegree(int b)
 vector<unsigned> Graph::traverseTopo()
 {
   vector<unsigned> result;
-  for (int i = 0; i < N; i++)
+  for (int i = 1; i < N; i++)
   {
     if (verticeInDegree[i] == 0)
     {
@@ -44,11 +44,12 @@ vector<unsigned> Graph::traverseTopo()
       {
         verticeInDegree[successorJob[i]]--;
       }
-      else if (successorMachine[i] != 0)
+      if (successorMachine[i] != 0)
       {
         verticeInDegree[successorMachine[i]]--;
       }
       verticeInDegree[i] = -1;
+
       result.push_back(i);
       i = 0;
     }
