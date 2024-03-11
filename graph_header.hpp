@@ -22,7 +22,9 @@ public:
   int getMachineSuccessor(int a);
   void initializeJobSuccessors(Graph &g);
   void initializeMachineSuccessors(Graph &g);
+  vector<unsigned> traverseTopo();
   void printSJ();
   void printSM();
   void printInDegree();
+  void printVector(vector<unsigned> &vec);
 };

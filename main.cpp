@@ -44,6 +44,8 @@ int main()
           << g.getMachineSuccessor(4) << endl;
 
      g.printInDegree();
+     vector<unsigned> v = g.traverseTopo();
+     g.printVector(v);
 
      return 0;
 }

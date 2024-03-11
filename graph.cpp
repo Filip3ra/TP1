@@ -33,6 +33,29 @@ void Graph::addInDegree(int b)
   verticeInDegree[b]++;
 }
 
+vector<unsigned> Graph::traverseTopo()
+{
+  vector<unsigned> result;
+  for (int i = 0; i < N; i++)
+  {
+    if (verticeInDegree[i] == 0)
+    {
+      if (successorJob[i] != 0)
+      {
+        verticeInDegree[successorJob[i]]--;
+      }
+      else if (successorMachine[i] != 0)
+      {
+        verticeInDegree[successorMachine[i]]--;
+      }
+      verticeInDegree[i] = -1;
+      result.push_back(i);
+      i = 0;
+    }
+  }
+  return result;
+}
+
 void Graph::initializeJobSuccessors(Graph &g)
 {
   g.addEdge(successorJob, 7, 10);
@@ -86,6 +109,15 @@ void Graph::printInDegree()
   {
     cout << "[" << v << "] --> " << verticeInDegree[v] << endl;
   }
+}
+
+void Graph::printVector(vector<unsigned> &vec)
+{
+  for (int i = 0; i < vec.size(); ++i)
+  {
+    cout << vec[i] << " --> ";
+  }
+  cout << endl;
 }
 
 /* Implementar um destrutor depois ? */
