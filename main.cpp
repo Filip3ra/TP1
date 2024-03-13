@@ -26,6 +26,7 @@ Parte 2:
 
 int main()
 {
+     /*
      int n = 17;
      int m = 0;
      Graph g(n, m);
@@ -46,6 +47,16 @@ int main()
      g.printInDegree();
      vector<unsigned> v = g.traverseTopo();
      g.printVector(v);
+*/
+
+     // Nome do arquivo
+     std::string nome_arquivo = "entradas/e2.txt"; // Substitua "seu_arquivo.txt" pelo nome do seu arquivo
+
+     // Criar uma instância da classe JobShopScheduler
+     JobShopScheduler scheduler(nome_arquivo);
+
+     // Imprimir as informações
+     scheduler.imprimir_informacoes();
 
      return 0;
 }
