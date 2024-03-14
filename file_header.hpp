@@ -1,18 +1,18 @@
 #pragma once
-
 #include <vector>
 #include <string>
+using namespace std;
 
 class JobShopScheduler
 {
 public:
   // Construtor
-  JobShopScheduler(const std::string &nome_arquivo);
+  JobShopScheduler(const string &file_name);
 
   // Função para imprimir as informações gerais do arquivo de entrada
   void printInfo();
   // Função para imprimir uma matriz
-  void printMatrix(const std::vector<std::vector<int>> &matriz);
+  void printMatrix(const vector<vector<int>> &matrix);
 
 private:
   // Variáveis para armazenar informações do cabeçalho
@@ -24,9 +24,9 @@ private:
   int lower_bound;
 
   // Matrizes para armazenar Times e Machines
-  std::vector<std::vector<int>> times_matrix;
-  std::vector<std::vector<int>> machines_matrix;
+  vector<vector<int>> times_matrix;
+  vector<vector<int>> machines_matrix;
 
   // Função para ler o arquivo e extrair as informações
-  void fileReader(const std::string &nome_arquivo);
+  void fileReader(const string &file_name);
 };

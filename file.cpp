@@ -2,93 +2,93 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+using namespace std;
 
 // Construtor
-JobShopScheduler::JobShopScheduler(const std::string &nome_arquivo)
+JobShopScheduler::JobShopScheduler(const string &file_name)
 {
-  fileReader(nome_arquivo);
+  fileReader(file_name);
 }
 
 // Função para ler o arquivo e extrair as informações
-void JobShopScheduler::fileReader(const std::string &nome_arquivo)
+void JobShopScheduler::fileReader(const string &file_name)
 {
   // Abrir o arquivo
-  std::ifstream arquivo(nome_arquivo);
+  ifstream file(file_name);
 
   // Verificar se o arquivo foi aberto corretamente
-  if (arquivo.is_open())
+  if (file.is_open())
   {
-    std::string linha;
+    string line;
 
     // Ler as linhas do arquivo
-    for (int i = 0; getline(arquivo, linha); ++i)
+    for (int i = 0; getline(file, line); ++i)
     {
-      std::stringstream ss(linha);
+      stringstream ss(line);
       if (i == 1)
       {
         // Processar informações do cabeçalho
         ss >> nb_of_jobs >> nb_of_machines >> time_seed >> machine_seed >> upper_bound >> lower_bound;
       }
-      else if (i >= 3 && i < 18)
+      else if (i >= 3 && i < 18) // a partir da terceira linha do arquivo, matriz times
       {
-        // Processar a matriz Times
-        std::vector<int> temp;
-        int valor;
-        while (ss >> valor)
+        vector<int> temp;
+        int value;
+        while (ss >> value)
         {
-          temp.push_back(valor);
+          temp.push_back(value);
         }
         times_matrix.push_back(temp);
       }
       else if (i >= 19 && i < 35)
       {
-        // Processar a matriz Machines
-        std::vector<int> temp;
-        int valor;
-        while (ss >> valor)
+        // Processar a matrix Machines
+        vector<int> temp;
+        int value;
+        while (ss >> value)
         {
-          temp.push_back(valor);
+          temp.push_back(value);
         }
         machines_matrix.push_back(temp);
       }
     }
 
-    // Fechar o arquivo
-    arquivo.close();
+    // Fechar o file
+    file.close();
   }
   else
   {
-    // Exibir mensagem de erro se não foi possível abrir o arquivo
-    std::cout << "Erro ao abrir o arquivo." << std::endl;
+    // Exibir mensagem de erro se não foi possível abrir o file
+    cout << "Erro ao abrir o file." << endl;
   }
 }
 
-// Função para imprimir uma matriz
-void JobShopScheduler::printMatrix(const std::vector<std::vector<int>> &matriz)
+// Função para imprimir uma matrix
+void JobShopScheduler::printMatrix(const vector<vector<int>> &matrix)
 {
-  for (const auto &linha : matriz)
+  for (const auto &line : matrix)
   {
-    for (int valor : linha)
+    for (int value : line)
     {
-      std::cout << valor << " ";
+      cout << value << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
 // Função para imprimir as informações
 void JobShopScheduler::printInfo()
 {
-  std::cout << "Nb of jobs: " << nb_of_jobs << std::endl;
-  std::cout << "Nb of Machines: " << nb_of_machines << std::endl;
-  std::cout << "Time seed: " << time_seed << std::endl;
-  std::cout << "Machine seed: " << machine_seed << std::endl;
-  std::cout << "Upper bound: " << upper_bound << std::endl;
-  std::cout << "Lower bound: " << lower_bound << std::endl;
+  cout << "Nb of jobs: " << nb_of_jobs << endl;
+  cout << "Nb of Machines: " << nb_of_machines << endl;
+  cout << "Time seed: " << time_seed << endl;
+  cout << "Machine seed: " << machine_seed << endl;
+  cout << "Upper bound: " << upper_bound << endl;
+  cout << "Lower bound: " << lower_bound << endl;
 
-  std::cout << "Times Matrix:" << std::endl;
+  cout << "Times Matrix:" << endl;
   printMatrix(times_matrix);
 
-  std::cout << "Machines Matrix:" << std::endl;
+  cout << "Machines Matrix:" << endl;
   printMatrix(machines_matrix);
 }

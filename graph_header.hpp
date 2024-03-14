@@ -9,10 +9,10 @@ class Graph
 private:
   unsigned N;
   unsigned M;
-  vector<unsigned> successorJob;
-  vector<unsigned> successorMachine;
+  vector<unsigned> successor_job;
+  vector<unsigned> successor_machine;
   vector<unsigned> time;
-  vector<unsigned> verticeInDegree;
+  vector<unsigned> vertice_in_degree;
 
 public:
   Graph(int n, int m);

@@ -7,19 +7,19 @@ Graph::Graph(int n, int m)
   this->N = n;
   this->M = m;
   time.resize(n);
-  successorJob.resize(n);
-  successorMachine.resize(n);
-  verticeInDegree.resize(n);
+  successor_job.resize(n);
+  successor_machine.resize(n);
+  vertice_in_degree.resize(n);
 }
 
 int Graph::getJobSuccessor(int a)
 {
-  return successorJob[a];
+  return successor_job[a];
 }
 
 int Graph::getMachineSuccessor(int a)
 {
-  return successorMachine[a];
+  return successor_machine[a];
 }
 
 void Graph::addEdge(vector<unsigned> &vec, int a, int b)
@@ -30,7 +30,7 @@ void Graph::addEdge(vector<unsigned> &vec, int a, int b)
 
 void Graph::addInDegree(int b)
 {
-  verticeInDegree[b]++;
+  vertice_in_degree[b]++;
 }
 
 vector<unsigned> Graph::traverseTopo()
@@ -38,17 +38,17 @@ vector<unsigned> Graph::traverseTopo()
   vector<unsigned> result;
   for (int i = 1; i < N; i++)
   {
-    if (verticeInDegree[i] == 0)
+    if (vertice_in_degree[i] == 0)
     {
-      if (successorJob[i] != 0)
+      if (successor_job[i] != 0)
       {
-        verticeInDegree[successorJob[i]]--;
+        vertice_in_degree[successor_job[i]]--;
       }
-      if (successorMachine[i] != 0)
+      if (successor_machine[i] != 0)
       {
-        verticeInDegree[successorMachine[i]]--;
+        vertice_in_degree[successor_machine[i]]--;
       }
-      verticeInDegree[i] = -1;
+      vertice_in_degree[i] = -1;
 
       result.push_back(i);
       i = 0;
@@ -59,32 +59,32 @@ vector<unsigned> Graph::traverseTopo()
 
 void Graph::initializeJobSuccessors(Graph &g)
 {
-  g.addEdge(successorJob, 7, 10);
-  g.addEdge(successorJob, 10, 3);
-  g.addEdge(successorJob, 4, 1);
-  g.addEdge(successorJob, 1, 2);
-  g.addEdge(successorJob, 8, 14);
-  g.addEdge(successorJob, 14, 5);
-  g.addEdge(successorJob, 11, 15);
-  g.addEdge(successorJob, 15, 9);
-  g.addEdge(successorJob, 12, 13);
-  g.addEdge(successorJob, 13, 6);
+  g.addEdge(successor_job, 7, 10);
+  g.addEdge(successor_job, 10, 3);
+  g.addEdge(successor_job, 4, 1);
+  g.addEdge(successor_job, 1, 2);
+  g.addEdge(successor_job, 8, 14);
+  g.addEdge(successor_job, 14, 5);
+  g.addEdge(successor_job, 11, 15);
+  g.addEdge(successor_job, 15, 9);
+  g.addEdge(successor_job, 12, 13);
+  g.addEdge(successor_job, 13, 6);
 }
 
 void Graph::initializeMachineSuccessors(Graph &g)
 {
-  g.addEdge(successorMachine, 7, 8);
-  g.addEdge(successorMachine, 8, 2);
-  g.addEdge(successorMachine, 2, 12);
-  g.addEdge(successorMachine, 12, 9);
-  g.addEdge(successorMachine, 10, 1);
-  g.addEdge(successorMachine, 1, 11);
-  g.addEdge(successorMachine, 11, 14);
-  g.addEdge(successorMachine, 14, 13);
-  g.addEdge(successorMachine, 4, 3);
-  g.addEdge(successorMachine, 3, 5);
-  g.addEdge(successorMachine, 5, 15);
-  g.addEdge(successorMachine, 15, 6);
+  g.addEdge(successor_machine, 7, 8);
+  g.addEdge(successor_machine, 8, 2);
+  g.addEdge(successor_machine, 2, 12);
+  g.addEdge(successor_machine, 12, 9);
+  g.addEdge(successor_machine, 10, 1);
+  g.addEdge(successor_machine, 1, 11);
+  g.addEdge(successor_machine, 11, 14);
+  g.addEdge(successor_machine, 14, 13);
+  g.addEdge(successor_machine, 4, 3);
+  g.addEdge(successor_machine, 3, 5);
+  g.addEdge(successor_machine, 5, 15);
+  g.addEdge(successor_machine, 15, 6);
 }
 
 // Essas funções de print são só pra testes, devo remover posteriormente
@@ -92,7 +92,7 @@ void Graph::printSJ()
 {
   for (int v = 0; v < N; ++v)
   {
-    cout << "[" << v << "] --> " << successorJob[v] << endl;
+    cout << "[" << v << "] --> " << successor_job[v] << endl;
   }
 }
 
@@ -100,7 +100,7 @@ void Graph::printSM()
 {
   for (int v = 0; v < N; ++v)
   {
-    cout << "[" << v << "] --> " << successorMachine[v] << endl;
+    cout << "[" << v << "] --> " << successor_machine[v] << endl;
   }
 }
 
@@ -108,7 +108,7 @@ void Graph::printInDegree()
 {
   for (int v = 0; v < N; ++v)
   {
-    cout << "[" << v << "] --> " << verticeInDegree[v] << endl;
+    cout << "[" << v << "] --> " << vertice_in_degree[v] << endl;
   }
 }
 
