@@ -30,7 +30,7 @@ void JobShopScheduler::fileReader(const string &file_name)
         // Processar informações do cabeçalho
         ss >> nb_of_jobs >> nb_of_machines >> time_seed >> machine_seed >> upper_bound >> lower_bound;
       }
-      else if (i >= 3 && i < 18) // a partir da terceira linha do arquivo, matriz times
+      else if (i >= 3 && i < 18) // linha 3 do arquivo
       {
         vector<int> temp;
         int value;
@@ -40,9 +40,9 @@ void JobShopScheduler::fileReader(const string &file_name)
         }
         times_matrix.push_back(temp);
       }
-      else if (i >= 19 && i < 35)
+      else if (i >= 19 && i < 35) // linha 19 do arquivo
       {
-        // Processar a matrix Machines
+        // Processar a matriz Machines
         vector<int> temp;
         int value;
         while (ss >> value)
@@ -53,17 +53,16 @@ void JobShopScheduler::fileReader(const string &file_name)
       }
     }
 
-    // Fechar o file
     file.close();
   }
   else
   {
-    // Exibir mensagem de erro se não foi possível abrir o file
-    cout << "Erro ao abrir o file." << endl;
+    // Exibir mensagem de erro se não foi possível abrir o arquivo
+    cout << "Erro ao abrir o arquivo." << endl;
   }
 }
 
-// Função para imprimir uma matrix
+// Função para imprimir uma matriz
 void JobShopScheduler::printMatrix(const vector<vector<int>> &matrix)
 {
   for (const auto &line : matrix)
@@ -76,7 +75,7 @@ void JobShopScheduler::printMatrix(const vector<vector<int>> &matrix)
   }
 }
 
-// Função para imprimir as informações
+// Função para imprimir as informações gerais e as matrizes
 void JobShopScheduler::printInfo()
 {
   cout << "Nb of jobs: " << nb_of_jobs << endl;

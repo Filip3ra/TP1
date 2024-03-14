@@ -11,8 +11,6 @@ public:
 
   // Função para imprimir as informações gerais do arquivo de entrada
   void printInfo();
-  // Função para imprimir uma matriz
-  void printMatrix(const vector<vector<int>> &matrix);
 
 private:
   // Variáveis para armazenar informações do cabeçalho
@@ -29,4 +27,7 @@ private:
 
   // Função para ler o arquivo e extrair as informações
   void fileReader(const string &file_name);
+
+  // Função para imprimir uma matriz
+  void printMatrix(const vector<vector<int>> &matrix);
 };

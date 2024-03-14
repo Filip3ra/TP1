@@ -87,7 +87,7 @@ void Graph::initializeMachineSuccessors(Graph &g)
   g.addEdge(successor_machine, 15, 6);
 }
 
-// Essas funções de print são só pra testes, devo remover posteriormente
+// Funções de print para testes
 void Graph::printSJ()
 {
   for (int v = 0; v < N; ++v)
@@ -120,5 +120,3 @@ void Graph::printVector(vector<unsigned> &vec)
   }
   cout << endl;
 }
-
-/* Implementar um destrutor depois ? */
