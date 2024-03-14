@@ -1,4 +1,4 @@
-#include "header.hpp"
+#include "file_header.hpp"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -6,11 +6,11 @@
 // Construtor
 JobShopScheduler::JobShopScheduler(const std::string &nome_arquivo)
 {
-  ler_arquivo(nome_arquivo);
+  fileReader(nome_arquivo);
 }
 
 // Função para ler o arquivo e extrair as informações
-void JobShopScheduler::ler_arquivo(const std::string &nome_arquivo)
+void JobShopScheduler::fileReader(const std::string &nome_arquivo)
 {
   // Abrir o arquivo
   std::ifstream arquivo(nome_arquivo);
@@ -64,7 +64,7 @@ void JobShopScheduler::ler_arquivo(const std::string &nome_arquivo)
 }
 
 // Função para imprimir uma matriz
-void JobShopScheduler::imprimir_matriz(const std::vector<std::vector<int>> &matriz)
+void JobShopScheduler::printMatrix(const std::vector<std::vector<int>> &matriz)
 {
   for (const auto &linha : matriz)
   {
@@ -77,9 +77,8 @@ void JobShopScheduler::imprimir_matriz(const std::vector<std::vector<int>> &matr
 }
 
 // Função para imprimir as informações
-void JobShopScheduler::imprimir_informacoes()
+void JobShopScheduler::printInfo()
 {
-  // Exibir as informações
   std::cout << "Nb of jobs: " << nb_of_jobs << std::endl;
   std::cout << "Nb of Machines: " << nb_of_machines << std::endl;
   std::cout << "Time seed: " << time_seed << std::endl;
@@ -88,8 +87,8 @@ void JobShopScheduler::imprimir_informacoes()
   std::cout << "Lower bound: " << lower_bound << std::endl;
 
   std::cout << "Times Matrix:" << std::endl;
-  imprimir_matriz(times_matrix);
+  printMatrix(times_matrix);
 
   std::cout << "Machines Matrix:" << std::endl;
-  imprimir_matriz(machines_matrix);
+  printMatrix(machines_matrix);
 }

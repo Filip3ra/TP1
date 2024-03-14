@@ -9,8 +9,10 @@ public:
   // Construtor
   JobShopScheduler(const std::string &nome_arquivo);
 
-  // Função para imprimir as informações
-  void imprimir_informacoes();
+  // Função para imprimir as informações gerais do arquivo de entrada
+  void printInfo();
+  // Função para imprimir uma matriz
+  void printMatrix(const std::vector<std::vector<int>> &matriz);
 
 private:
   // Variáveis para armazenar informações do cabeçalho
@@ -26,8 +28,5 @@ private:
   std::vector<std::vector<int>> machines_matrix;
 
   // Função para ler o arquivo e extrair as informações
-  void ler_arquivo(const std::string &nome_arquivo);
-
-  // Função para imprimir uma matriz
-  void imprimir_matriz(const std::vector<std::vector<int>> &matriz);
+  void fileReader(const std::string &nome_arquivo);
 };

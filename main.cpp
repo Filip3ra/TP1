@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include "header.hpp"
+#include "file_header.hpp"
 #include "graph_header.hpp"
 
 using namespace std;
@@ -49,14 +49,12 @@ int main()
      g.printVector(v);
 */
 
-     // Nome do arquivo
-     std::string nome_arquivo = "entradas/e2.txt"; // Substitua "seu_arquivo.txt" pelo nome do seu arquivo
+     std::string nome_arquivo = "entradas/e2.txt";
 
      // Criar uma instância da classe JobShopScheduler
      JobShopScheduler scheduler(nome_arquivo);
 
-     // Imprimir as informações
-     scheduler.imprimir_informacoes();
+     scheduler.printInfo();
 
      return 0;
 }
