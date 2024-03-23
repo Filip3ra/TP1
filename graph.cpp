@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+Graph::Graph(){}
+
 Graph::Graph(int n, int m)
 {
   this->N = n;
@@ -17,9 +19,27 @@ int Graph::getJobSuccessor(int a)
   return successor_job[a];
 }
 
+void Graph::setOpJobSuccessor(const unsigned op, const unsigned successor) {
+
+  addEdge(successor_job, op, successor);
+}
+
 int Graph::getMachineSuccessor(int a)
 {
   return successor_machine[a];
+}
+
+void Graph::setOpMachineSuccessor(const unsigned op, const unsigned successor) {
+
+  addEdge(successor_machine, op, successor);
+}
+int Graph::getOpTime(const unsigned op) {
+
+  return time[op];
+}
+void Graph::setOpTime(const unsigned op, const unsigned time) {
+
+  this->time[op] = time;
 }
 
 void Graph::addEdge(vector<unsigned> &vec, int a, int b)
