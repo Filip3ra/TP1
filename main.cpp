@@ -27,7 +27,7 @@ Parte 2:
 
 */
 
-int main()
+int main(int argc, char* argv[])
 {
      /*
      int n = 17;
@@ -51,13 +51,18 @@ int main()
      vector<unsigned> v = g.traverseTopo();
      g.printVector(v);
 */
-
-     std::string nome_arquivo = "entradas/e2.txt";
+  if (argc < 2)
+  {
+    cout << "Informe o nome do arquivo: ./program [filename]" << endl;
+    return 0;
+  }
+     std::string nome_arquivo = argv[1];
 
      // Criar uma instância da classe JobShopScheduler
      JobShopScheduler scheduler(nome_arquivo);
 
-     scheduler.printInfo();
+     scheduler.printMakes();
+
 
      return 0;
 }
