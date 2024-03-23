@@ -42,6 +42,8 @@ private:
   // Gera as arestas de máquina do dag passado como parametro
   void gifflerThompson(Graph& dag) const;
 
+  // Calcula os tempos de inicio de cada operação e o makespan se baseando no dag passado como parametro
+  vector<unsigned> calcStartTimes(Graph& dag);
 
   // Calcula o tempo mínimo restante para terminar o job j logo antes de ser processado na máquina m
   unsigned calcRemainingTime(unsigned j, unsigned m) const;

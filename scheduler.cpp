@@ -151,3 +151,47 @@ void JobShopScheduler::gifflerThompson(Graph & dag) const
     job_time[op_to_job[op]] = earl_start + dag.getOpTime(op);
   }
 }
+
+vector<unsigned> JobShopScheduler::calcStartTimes(Graph& dag)
+{
+
+  vector<unsigned> op_to_job;
+  vector<unsigned> op_to_mach;
+  vector<unsigned> topo_sort;
+  vector<unsigned> start_times(nb_of_jobs * nb_of_machines + 1, 0);
+  makespan = 0;
+  unsigned max = 0;
+  unsigned next_op;
+  
+  initAux(op_to_mach, op_to_job);
+
+  topo_sort = dag.traverseTopo();
+
+  for (unsigned i = 0; i < topo_sort.size(); ++i)
+  {
+    unsigned op = topo_sort[i];
+
+    max = start_times[op] + dag.getOpTime(op);
+
+    if (max > makespan)
+    {
+      makespan = max;
+    }
+
+    next_op = dag.getJobSuccessor(op);
+
+    if (next_op && start_times[next_op] < max)
+    {
+      start_times[next_op] = max;
+    }
+
+    next_op = dag.getMachineSuccessor(op);
+
+    if (next_op && start_times[next_op] < max)
+    {
+      start_times[next_op] = max;
+    }
+  }
+
+  return start_times;
+}

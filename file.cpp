@@ -14,6 +14,8 @@ JobShopScheduler::JobShopScheduler(const string &file_name)
   dag = generateDag();
 
   gifflerThompson(dag);
+
+  vector<unsigned> starts = calcStartTimes(dag);
 }
 
 // Função para ler o arquivo e extrair as informações
