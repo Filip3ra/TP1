@@ -12,6 +12,9 @@ public:
   // Função para imprimir as informações gerais do arquivo de entrada
   void printInfo();
 
+  // Imprime limite inferior, makespan obtido e diferença percetual para a instância atual
+  void printMakes() const;
+
 private:
   // Variáveis para armazenar informações do cabeçalho
   int nb_of_jobs;
@@ -20,6 +23,7 @@ private:
   int machine_seed;
   int upper_bound;
   int lower_bound;
+  unsigned makespan;
 
   // Matrizes para armazenar Times e Machines
   vector<vector<int>> times_matrix;

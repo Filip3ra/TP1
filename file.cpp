@@ -91,3 +91,9 @@ void JobShopScheduler::printInfo()
   cout << "Machines Matrix:" << endl;
   printMatrix(machines_matrix);
 }
+
+// Imprime limite inferior, makespan obtido e diferença percetual para a instância atual
+void JobShopScheduler::printMakes() const
+{
+  cout << lower_bound << " " << makespan << " " << (((double)makespan - (double)lower_bound) / (double)lower_bound) * 100 << endl;
+}
