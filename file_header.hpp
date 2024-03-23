@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "graph_header.hpp"
 using namespace std;
 
 class JobShopScheduler
@@ -34,4 +35,17 @@ private:
 
   // Função para imprimir uma matriz
   void printMatrix(const vector<vector<int>> &matrix);
+
+  // Gera um dag incompleto baseado nas matrizes de tempos e máquinas
+  Graph generateDag() const;
+
+  // Gera as arestas de máquina do dag passado como parametro
+  void gifflerThompson(Graph& dag) const;
+
+
+  // Calcula o tempo mínimo restante para terminar o job j logo antes de ser processado na máquina m
+  unsigned calcRemainingTime(unsigned j, unsigned m) const;
+
+  // Gera os vetores op_to_mach e op_to_job que armazenam, respectivamente, a máquina e o job de determinada operação x;
+  void initAux(vector<unsigned>& op_to_mach, vector<unsigned>& op_to_job) const;
 };

@@ -7,7 +7,13 @@ using namespace std;
 // Construtor
 JobShopScheduler::JobShopScheduler(const string &file_name)
 {
+  Graph dag;
+  
   fileReader(file_name);
+
+  dag = generateDag();
+
+  gifflerThompson(dag);
 }
 
 // Função para ler o arquivo e extrair as informações
