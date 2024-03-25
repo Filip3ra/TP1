@@ -7,25 +7,26 @@ Graph JobShopScheduler::generateDag() const
   Graph g(nb_of_jobs * nb_of_machines + 1, nb_of_jobs * (nb_of_machines - 1));
   unsigned op_index;
 
-  // Adiciona todas as arestas que indicam precendencia dentro dos jobs e os pesos de cada vértice
+  // Adiciona todas as arestas que indicam precendencia dentro dos jobs e os pesos de cada vï¿½rtice
   for (int i = 1; i <= nb_of_jobs; ++i)
   {
     for (int j = 1; j <= nb_of_machines; ++j)
     {
       op_index = (i - 1) * nb_of_machines + j;
       g.setOpTime(op_index, times_matrix[i - 1][j - 1]);
-      if (op_index % nb_of_machines) g.setOpJobSuccessor(op_index, op_index + 1);
+      if (op_index % nb_of_machines)
+        g.setOpJobSuccessor(op_index, op_index + 1);
     }
   }
 
   return g;
 }
 
-void JobShopScheduler::initAux(vector<unsigned> & op_to_mach, vector<unsigned> & op_to_job) const
+void JobShopScheduler::initAux(vector<unsigned> &op_to_mach, vector<unsigned> &op_to_job) const
 {
-  // Dada uma operação op do job j, op_to_job[op] = j
-  // Dada uma operação op da máquina m, op_to_mach[op] = m
-  
+  // Dada uma operaï¿½ï¿½o op do job j, op_to_job[op] = j
+  // Dada uma operaï¿½ï¿½o op da mï¿½quina m, op_to_mach[op] = m
+
   unsigned op_index;
 
   op_to_job.resize(nb_of_jobs * nb_of_machines + 1, 0);
@@ -37,7 +38,7 @@ void JobShopScheduler::initAux(vector<unsigned> & op_to_mach, vector<unsigned> &
     {
       op_index = (i - 1) * nb_of_machines + j;
       op_to_job[op_index] = i;
-      op_to_mach[op_index] = machines_matrix[i-1][j-1];
+      op_to_mach[op_index] = machines_matrix[i - 1][j - 1];
     }
   }
 }
@@ -47,7 +48,7 @@ unsigned JobShopScheduler::calcRemainingTime(unsigned j, unsigned m) const
   unsigned sum = 0;
   unsigned i = 0;
 
-  // Encontra o indice da operação do job j que precisa ser executada na máquina m
+  // Encontra o indice da operaÃ§Ã£o do job j que precisa ser executada na mï¿½quina m
   for (i = 0; i < nb_of_machines; ++i)
   {
     if (machines_matrix[j][i] == m)
@@ -56,28 +57,29 @@ unsigned JobShopScheduler::calcRemainingTime(unsigned j, unsigned m) const
     }
   }
 
-  // Calcula a soma dos tempos de todas as operações que são processadas após a operação i do job j  incluindo i
-  for (i; i < nb_of_machines; ++i) {
+  // Calcula a soma dos tempos de todas as operaï¿½ï¿½es que sï¿½o processadas apï¿½s a operaï¿½ï¿½o i do job j  incluindo i
+  for (i; i < nb_of_machines; ++i)
+  {
     sum += times_matrix[j][i];
   }
 
   return sum;
 }
 
-void JobShopScheduler::gifflerThompson(Graph & dag) const
+void JobShopScheduler::gifflerThompson(Graph &dag) const
 {
   set<int> ready;
-  vector<unsigned> machine_time(nb_of_machines+1, 0);
-  vector<unsigned> job_time(nb_of_jobs+1, 0);
+  vector<unsigned> machine_time(nb_of_machines + 1, 0);
+  vector<unsigned> job_time(nb_of_jobs + 1, 0);
   vector<unsigned> op_to_job;
   vector<unsigned> op_to_mach;
-  vector<unsigned> mach_leaf(nb_of_machines+1, 0);
+  vector<unsigned> mach_leaf(nb_of_machines + 1, 0);
   unsigned counter = 0;
 
-  // Inicializa op_to_mach e op_to_job. op_to_job[i] = j pois a operação i pertence ao job j. op_to_mach[i] = m pois a operação i será executada na máquina m
+  // Inicializa op_to_mach e op_to_job. op_to_job[i] = j pois a operaï¿½ï¿½o i pertence ao job j. op_to_mach[i] = m pois a operaï¿½ï¿½o i serï¿½ executada na mï¿½quina m
   initAux(op_to_mach, op_to_job);
 
-  // Insere em ready a primeira operação de cada job
+  // Insere em ready a primeira operaï¿½ï¿½o de cada job
   for (unsigned i = 0; i < nb_of_jobs; ++i)
   {
     ready.insert((i * nb_of_machines) + 1);
@@ -90,7 +92,7 @@ void JobShopScheduler::gifflerThompson(Graph & dag) const
     unsigned earl_comp = UINT_MAX;
     unsigned mach = 0;
 
-    // Encontra o menor tempo de termino earl_comp e a máquina mach associada a ele entre as operações de ready
+    // Encontra o menor tempo de termino earl_comp e a mï¿½quina mach associada a ele entre as operaï¿½ï¿½es de ready
     for (unsigned op : ready)
     {
       unsigned completionTime = max(machine_time[op_to_mach[op]], job_time[op_to_job[op]]) + dag.getOpTime(op);
@@ -103,7 +105,7 @@ void JobShopScheduler::gifflerThompson(Graph & dag) const
 
     vector<unsigned> ready_0;
 
-    // Insere em ready_0 todas as operações em ready que são executadas na máquina mach
+    // Insere em ready_0 todas as operaï¿½ï¿½es em ready que sï¿½o executadas na mï¿½quina mach
     for (unsigned op : ready)
     {
       if (op_to_mach[op] == mach)
@@ -114,7 +116,7 @@ void JobShopScheduler::gifflerThompson(Graph & dag) const
 
     vector<unsigned> ready_1;
 
-    // Insere em ready_1 todas as operações em ready_0 que possuem um tempo de início menor que earl_comp
+    // Insere em ready_1 todas as operaï¿½ï¿½es em ready_0 que possuem um tempo de inï¿½cio menor que earl_comp
     for (unsigned op : ready_0)
     {
       unsigned start_time = max(machine_time[op_to_mach[op]], job_time[op_to_job[op]]);
@@ -126,41 +128,41 @@ void JobShopScheduler::gifflerThompson(Graph & dag) const
 
     unsigned op = ready_1[0];
 
-    // Seleciona uma operação de ready_1 para ser agendada cujo o tempo mínimo para que o respectivo job termine seja o maior
+    // Seleciona uma operaï¿½ï¿½o de ready_1 para ser agendada cujo o tempo mï¿½nimo para que o respectivo job termine seja o maior
     for (unsigned i = 1; i < ready_1.size(); ++i)
     {
-      if (calcRemainingTime(op_to_job[ready_1[i]]-1, op_to_mach[ready_1[i]]-1) > calcRemainingTime(op_to_job[op]-1, op_to_mach[op]-1))
+      if (calcRemainingTime(op_to_job[ready_1[i]] - 1, op_to_mach[ready_1[i]] - 1) > calcRemainingTime(op_to_job[op] - 1, op_to_mach[op] - 1))
       {
         op = ready_1[i];
       }
     }
 
-    // Adiciona uma aresta entre a última operação de um máquina e a nova operação que será agendada nessa máquina
+    // Adiciona uma aresta entre a ï¿½ltima operaï¿½ï¿½o de um mï¿½quina e a nova operaï¿½ï¿½o que serï¿½ agendada nessa mï¿½quina
     if (mach_leaf[op_to_mach[op]])
     {
       dag.setOpMachineSuccessor(mach_leaf[op_to_mach[op]], op);
     }
 
-    // Atualiza o vetor mach_leaf que armazena o última operação agendada em determinada máquina
+    // Atualiza o vetor mach_leaf que armazena o ï¿½ltima operaï¿½ï¿½o agendada em determinada mï¿½quina
     mach_leaf[op_to_mach[op]] = op;
 
-    // Remove a operação agendada do vetor de operações prontas para serem agendadas
+    // Remove a operaï¿½ï¿½o agendada do vetor de operaï¿½ï¿½es prontas para serem agendadas
     ready.erase(op);
 
-    // Adiciona o successor da operação agendada no vetor ready se ele existir
+    // Adiciona o successor da operaï¿½ï¿½o agendada no vetor ready se ele existir
     if (dag.getJobSuccessor(op))
     {
       ready.insert(dag.getJobSuccessor(op));
     }
 
-    // Atualiza os vetores de tempo das máquina e jobs com o tempo da operação recém agendada
+    // Atualiza os vetores de tempo das mï¿½quina e jobs com o tempo da operaï¿½ï¿½o recï¿½m agendada
     unsigned earl_start = max(machine_time[op_to_mach[op]], job_time[op_to_job[op]]);
     machine_time[op_to_mach[op]] = earl_start + dag.getOpTime(op);
     job_time[op_to_job[op]] = earl_start + dag.getOpTime(op);
   }
 }
 
-vector<unsigned> JobShopScheduler::calcStartTimes(Graph& dag)
+vector<unsigned> JobShopScheduler::calcStartTimes(Graph &dag)
 {
   vector<unsigned> op_to_job;
   vector<unsigned> op_to_mach;
@@ -168,20 +170,20 @@ vector<unsigned> JobShopScheduler::calcStartTimes(Graph& dag)
   vector<unsigned> start_times(nb_of_jobs * nb_of_machines + 1, 0);
   unsigned max = 0;
   unsigned next_op;
-  
+
   makespan = 0;
 
   initAux(op_to_mach, op_to_job);
 
-  // Gera a ordenação topologica do dag que representa o schedule gerado
+  // Gera a ordenaï¿½ï¿½o topologica do dag que representa o schedule gerado
   topo_sort = dag.traverseTopo();
 
-  // Percorre a ordenação topológica
+  // Percorre a ordenaï¿½ï¿½o topolï¿½gica
   for (unsigned i = 0; i < topo_sort.size(); ++i)
   {
     unsigned op = topo_sort[i];
 
-    // Calcula o tempo de termino da operação op
+    // Calcula o tempo de termino da operaï¿½ï¿½o op
     max = start_times[op] + dag.getOpTime(op);
 
     // Atualiza o makespan se o tempo de termino de op for maior que o makespan atual
@@ -190,19 +192,19 @@ vector<unsigned> JobShopScheduler::calcStartTimes(Graph& dag)
       makespan = max;
     }
 
-    // Obtém o sucessor dentro do job da operação op
+    // Obtï¿½m o sucessor dentro do job da operaï¿½ï¿½o op
     next_op = dag.getJobSuccessor(op);
 
-    // Atualiza o tempo de início da operação sucessora se ela existe e se o tempo de término de op for maior que o tempo de inicio atual de next_op
+    // Atualiza o tempo de inï¿½cio da operaï¿½ï¿½o sucessora se ela existe e se o tempo de tï¿½rmino de op for maior que o tempo de inicio atual de next_op
     if (next_op && start_times[next_op] < max)
     {
       start_times[next_op] = max;
     }
 
-    // Obtém o sucessor dentro da máquina da operação op
+    // Obtï¿½m o sucessor dentro da mï¿½quina da operaï¿½ï¿½o op
     next_op = dag.getMachineSuccessor(op);
 
-    // Atualiza o tempo de início da operação sucessora se ela existe e se o tempo de término de op for maior que o tempo de início atual de next_op
+    // Atualiza o tempo de inï¿½cio da operaï¿½ï¿½o sucessora se ela existe e se o tempo de tï¿½rmino de op for maior que o tempo de inï¿½cio atual de next_op
     if (next_op && start_times[next_op] < max)
     {
       start_times[next_op] = max;
