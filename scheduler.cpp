@@ -4,10 +4,11 @@
 
 Graph JobShopScheduler::generateDag() const
 {
+  // Define número de vértices e arestas do grafo
   Graph g(nb_of_jobs * nb_of_machines + 1, nb_of_jobs * (nb_of_machines - 1));
   unsigned op_index;
 
-  // Adiciona todas as arestas que indicam precendencia dentro dos jobs e os pesos de cada v�rtice
+  // Adiciona todas as arestas que indicam precendencia dentro dos jobs e os pesos de cada vértice
   for (int i = 1; i <= nb_of_jobs; ++i)
   {
     for (int j = 1; j <= nb_of_machines; ++j)
