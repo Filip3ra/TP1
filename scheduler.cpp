@@ -13,10 +13,10 @@ Graph JobShopScheduler::generateDag() const
   {
     for (int j = 1; j <= nb_of_machines; ++j)
     {
-      op_index = (i - 1) * nb_of_machines + j;
-      g.setOpTime(op_index, times_matrix[i - 1][j - 1]);
-      if (op_index % nb_of_machines)
-        g.setOpJobSuccessor(op_index, op_index + 1);
+      op_index = (i - 1) * nb_of_machines + j;           // índice da operação atual, passa por todas as posições da matriz
+      g.setOpTime(op_index, times_matrix[i - 1][j - 1]); // atribui tempo de processamento atual da op ao vértice
+      if (op_index % nb_of_machines)                     // nb_machines é sempre 15, então resto é 0 só quando chega na última op
+        g.setOpJobSuccessor(op_index, op_index + 1);     // seta o sucessor de job
     }
   }
 
