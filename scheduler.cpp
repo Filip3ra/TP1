@@ -28,6 +28,13 @@ void JobShopScheduler::initAux(vector<unsigned> &op_to_mach, vector<unsigned> &o
   // Dada uma operação op do job j, op_to_job[op] = j
   // Dada uma operação op da máquina m, op_to_mach[op] = m
 
+  /* Associa uma operação com sua devida máquina, ou seja,
+   o indice 1 pega o primeiro valor da matriz de máquina,
+   por exemplo, se for 13, então a op 1 é executada na m13,
+   e se op 1 ta associada a primeira posição da matriz time,
+   então o valor da primiera posição dessa matriz é o tempo
+   de processamento da operação em questão. */
+
   unsigned op_index;
 
   op_to_job.resize(nb_of_jobs * nb_of_machines + 1, 0);
