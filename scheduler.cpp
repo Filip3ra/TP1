@@ -41,6 +41,7 @@ void JobShopScheduler::initAux(vector<unsigned> &op_to_mach, vector<unsigned> &o
 
   unsigned op_index;
 
+  // precisa do resize pois recebe sem ter dimensionado o tamanho
   op_to_job.resize(nb_of_jobs * nb_of_machines + 1, 0);
   op_to_mach.resize(nb_of_jobs * nb_of_machines + 1, 0);
 
@@ -80,18 +81,22 @@ unsigned JobShopScheduler::calcRemainingTime(unsigned j, unsigned m) const
 
 void JobShopScheduler::gifflerThompson(Graph &dag) const
 {
-  set<int> ready;
-  vector<unsigned> machine_time(nb_of_machines + 1, 0);
-  vector<unsigned> job_time(nb_of_jobs + 1, 0);
-  vector<unsigned> op_to_job;
-  vector<unsigned> op_to_mach;
-  vector<unsigned> mach_leaf(nb_of_machines + 1, 0);
+  set<int> ready;                                       // op pronta pra execução
+  vector<unsigned> machine_time(nb_of_machines + 1, 0); // tempo de maquina
+  vector<unsigned> job_time(nb_of_jobs + 1, 0);         // tempo do job
+  vector<unsigned> op_to_job;                           // mapeamento de op para job
+  vector<unsigned> op_to_mach;                          // mapeamento de op para maquina
+  vector<unsigned> mach_leaf(nb_of_machines + 1, 0);    // ultima op agendada em cada maquina
   unsigned counter = 0;
 
-  // Inicializa op_to_mach e op_to_job. op_to_job[i] = j pois a operaçao i pertence ao job j. op_to_mach[i] = m pois a operção i será executada na máquina m
+  // Inicializa op_to_mach e op_to_job.
+  // op_to_job[i] = j pois a operaçao i pertence ao job j.
+  // op_to_mach[i] = m pois a operção i será executada na máquina m
   initAux(op_to_mach, op_to_job);
 
   // Insere em ready a primeira operaçao de cada job
+  // A primeira op, primeiro valor de cada linha coluna 1 da matriz,
+  // está sempre pronta, não tem op precedente a elas.
   for (unsigned i = 0; i < nb_of_jobs; ++i)
   {
     ready.insert((i * nb_of_machines) + 1);
@@ -204,7 +209,7 @@ vector<unsigned> JobShopScheduler::calcStartTimes(Graph &dag)
       makespan = max;
     }
 
-    // Obt�m o sucessor dentro do job da operação op
+    // Obtém o sucessor dentro do job da operação op
     next_op = dag.getJobSuccessor(op);
 
     // Atualiza o tempo de início da operação sucessora se ela existe e se o tempo de término de op for maior que o tempo de inicio atual de next_op
