@@ -61,7 +61,8 @@ unsigned JobShopScheduler::calcRemainingTime(unsigned j, unsigned m) const
   unsigned sum = 0;
   unsigned i = 0;
 
-  // Encontra o indice da operação do job j que precisa ser executada na máquina m
+  // Encontra o indice da operação do job j
+  // que precisa ser executada na máquina m
   for (i = 0; i < nb_of_machines; ++i)
   {
     if (machines_matrix[j][i] == m)
@@ -70,7 +71,8 @@ unsigned JobShopScheduler::calcRemainingTime(unsigned j, unsigned m) const
     }
   }
 
-  // Calcula a soma dos tempos de todas as operações que são processadas após a operação i do job j  incluindo i
+  // Calcula a soma dos tempos de todas as operações
+  // que são processadas após a operação i do job j  incluindo i
   for (i; i < nb_of_machines; ++i)
   {
     sum += times_matrix[j][i];
@@ -109,7 +111,8 @@ void JobShopScheduler::gifflerThompson(Graph &dag) const
     unsigned earl_comp = UINT_MAX;
     unsigned mach = 0;
 
-    // Encontra o menor tempo de termino earl_comp e a máquina mach associada a ele entre as operações de ready
+    // Encontra o menor tempo de termino earl_comp e a
+    // máquina mach associada a ele entre as operações de ready
     for (unsigned op : ready)
     {
       unsigned completionTime = max(machine_time[op_to_mach[op]], job_time[op_to_job[op]]) + dag.getOpTime(op);
@@ -122,7 +125,8 @@ void JobShopScheduler::gifflerThompson(Graph &dag) const
 
     vector<unsigned> ready_0;
 
-    // Insere em ready_0 todas as operaçães em ready que são executadas na máquina mach
+    // Insere em ready_0 todas as operaçães em ready que são
+    // executadas na máquina mach
     for (unsigned op : ready)
     {
       if (op_to_mach[op] == mach)
@@ -133,7 +137,8 @@ void JobShopScheduler::gifflerThompson(Graph &dag) const
 
     vector<unsigned> ready_1;
 
-    // Insere em ready_1 todas as operações em ready_0 que possuem um tempo de início menor que earl_comp
+    // Insere em ready_1 todas as operações em ready_0
+    // que possuem um tempo de início menor que earl_comp
     for (unsigned op : ready_0)
     {
       unsigned start_time = max(machine_time[op_to_mach[op]], job_time[op_to_job[op]]);
@@ -145,7 +150,8 @@ void JobShopScheduler::gifflerThompson(Graph &dag) const
 
     unsigned op = ready_1[0];
 
-    // Seleciona uma operação de ready_1 para ser agendada cujo o tempo mínimo para que o respectivo job termine seja o maior
+    // Seleciona uma operação de ready_1 para ser agendada
+    // cujo o tempo mínimo para que o respectivo job termine seja o maior
     for (unsigned i = 1; i < ready_1.size(); ++i)
     {
       if (calcRemainingTime(op_to_job[ready_1[i]] - 1, op_to_mach[ready_1[i]] - 1) > calcRemainingTime(op_to_job[op] - 1, op_to_mach[op] - 1))
@@ -154,7 +160,8 @@ void JobShopScheduler::gifflerThompson(Graph &dag) const
       }
     }
 
-    // Adiciona uma aresta entre a última operação de um máquina e a nova operação que será agendada nessa máquina
+    // Adiciona uma aresta entre a última operação de
+    // um máquina e a nova operação que será agendada nessa máquina
     if (mach_leaf[op_to_mach[op]])
     {
       dag.setOpMachineSuccessor(mach_leaf[op_to_mach[op]], op);
