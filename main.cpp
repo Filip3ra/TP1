@@ -18,13 +18,6 @@ em ordem específica. Cada operação de um trabalho deve ser processada
 em uma máquina particular, e cada máquina só pode processar uma
 operação de cada vez.
 
-Parte 1: Implementar um algoritmo de percorrimento topológico para
-percorrer o grafo do trabalho.
-     -> Gerar um grafo direcionado usando vector
-     ->
-
-Parte 2:
-
 */
 
 int main(int argc, char *argv[])

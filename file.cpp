@@ -8,7 +8,7 @@ using namespace std;
 JobShopScheduler::JobShopScheduler(const string &file_name)
 {
   Graph dag;
-  
+
   fileReader(file_name);
 
   dag = generateDag();
@@ -40,6 +40,7 @@ void JobShopScheduler::fileReader(const string &file_name)
       }
       else if (i >= 3 && i < 18) // linha 3 do arquivo
       {
+        // Processa matriz Times
         vector<int> temp;
         int value;
         while (ss >> value)
@@ -50,7 +51,7 @@ void JobShopScheduler::fileReader(const string &file_name)
       }
       else if (i >= 19 && i < 35) // linha 19 do arquivo
       {
-        // Processar a matriz Machines
+        // Processa matriz Machines
         vector<int> temp;
         int value;
         while (ss >> value)
