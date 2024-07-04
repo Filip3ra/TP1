@@ -22,28 +22,20 @@ operação de cada vez.
 
 int main(int argc, char *argv[])
 {
-     /*
-     int n = 17;
-     int m = 0;
-     Graph g(n, m);
+     /* Caminha topológica no Grafo - item 2.1
 
-     g.initializeJobSuccessors(g);
-     g.initializeMachineSuccessors(g);
-     // g.printSJ();
-     // cout << "sucessores de maquinas: " << endl;
-     // g.printSM();
+          int n = 17;
+          int m = 0;
+          Graph g(n, m);
 
-     int x = 4;
-     cout << "sucessor de job de " << x << " e : "
-          << g.getJobSuccessor(4) << endl;
+          g.initializeJobSuccessors(g);
+          g.initializeMachineSuccessors(g);
 
-     cout << "sucessor de maquina de " << x << " e : "
-          << g.getMachineSuccessor(4) << endl;
+          vector<unsigned> v = g.traverseTopo();
+          g.printVector(v);
+     */
 
-     g.printInDegree();
-     vector<unsigned> v = g.traverseTopo();
-     g.printVector(v);
-*/
+     /* Resolução para instâncias - item 2.2 */
      if (argc < 2)
      {
           cout << "Informe o nome do arquivo: ./program [filename]" << endl;

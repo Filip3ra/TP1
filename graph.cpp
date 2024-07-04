@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-Graph::Graph(){}
+Graph::Graph() {}
 
 Graph::Graph(int n, int m)
 {
@@ -19,8 +19,8 @@ int Graph::getJobSuccessor(int a)
   return successor_job[a];
 }
 
-void Graph::setOpJobSuccessor(const unsigned op, const unsigned successor) {
-
+void Graph::setOpJobSuccessor(const unsigned op, const unsigned successor)
+{
   addEdge(successor_job, op, successor);
 }
 
@@ -29,16 +29,18 @@ int Graph::getMachineSuccessor(int a)
   return successor_machine[a];
 }
 
-void Graph::setOpMachineSuccessor(const unsigned op, const unsigned successor) {
-
+void Graph::setOpMachineSuccessor(const unsigned op, const unsigned successor)
+{
   addEdge(successor_machine, op, successor);
 }
-int Graph::getOpTime(const unsigned op) {
 
+int Graph::getOpTime(const unsigned op)
+{
   return time[op];
 }
-void Graph::setOpTime(const unsigned op, const unsigned time) {
 
+void Graph::setOpTime(const unsigned op, const unsigned time)
+{
   this->time[op] = time;
 }
 
@@ -77,6 +79,7 @@ vector<unsigned> Graph::traverseTopo()
   return result;
 }
 
+// Inicialização do Grafo 2.1 do trabalho
 void Graph::initializeJobSuccessors(Graph &g)
 {
   g.addEdge(successor_job, 7, 10);
