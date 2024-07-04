@@ -161,7 +161,7 @@ void JobShopScheduler::gifflerThompson(Graph &dag) const
     }
 
     // Adiciona uma aresta entre a última operação de
-    // um máquina e a nova operação que será agendada nessa máquina
+    // uma máquina e a nova operação que será agendada nessa máquina
     if (mach_leaf[op_to_mach[op]])
     {
       dag.setOpMachineSuccessor(mach_leaf[op_to_mach[op]], op);
