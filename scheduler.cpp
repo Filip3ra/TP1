@@ -184,6 +184,12 @@ void JobShopScheduler::gifflerThompson(Graph &dag) const
     machine_time[op_to_mach[op]] = earl_start + dag.getOpTime(op);
     job_time[op_to_job[op]] = earl_start + dag.getOpTime(op);
   }
+
+  for (unsigned i = 0; i < (nb_of_jobs * nb_of_machines + 1); ++i)
+  {
+    if (dag.getMachineSuccessor(i))
+      dag.setOpMachinePrev(dag.getMachineSuccessor(i), i);
+  }
 }
 
 vector<unsigned> JobShopScheduler::calcStartTimes(Graph &dag, vector<unsigned>& prev, unsigned & lastOp)

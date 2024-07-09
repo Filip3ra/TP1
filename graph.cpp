@@ -8,10 +8,11 @@ Graph::Graph(int n, int m)
 {
   this->N = n;
   this->M = m;
-  time.resize(n);
-  successor_job.resize(n);
-  successor_machine.resize(n);
-  vertice_in_degree.resize(n);
+  time.resize(n, 0);
+  successor_job.resize(n, 0);
+  successor_machine.resize(n, 0);
+  prev_machine.resize(n, 0);
+  vertice_in_degree.resize(n, 0);
 }
 
 int Graph::getJobSuccessor(int a)
@@ -32,6 +33,16 @@ int Graph::getMachineSuccessor(int a)
 void Graph::setOpMachineSuccessor(const unsigned op, const unsigned successor)
 {
   addEdge(successor_machine, op, successor);
+}
+
+int Graph::getMachinePrev(int a)
+{
+  return prev_machine[a];
+}
+
+void Graph::setOpMachinePrev(const unsigned op, const unsigned prev)
+{
+  prev_machine[op] = prev;
 }
 
 int Graph::getOpTime(const unsigned op)

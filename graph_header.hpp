@@ -11,6 +11,7 @@ private:
   unsigned M;
   vector<unsigned> successor_job;
   vector<unsigned> successor_machine;
+  vector<unsigned> prev_machine;
   vector<unsigned> time;
   vector<unsigned> vertice_in_degree;
 
@@ -23,6 +24,8 @@ public:
   void setOpJobSuccessor(const unsigned op, const unsigned successor);
   int getMachineSuccessor(int a);
   void setOpMachineSuccessor(const unsigned op, const unsigned successor);
+  int getMachinePrev(int a);
+  void setOpMachinePrev(const unsigned op, const unsigned prev);
   int getOpTime(const unsigned op);
   void setOpTime(const unsigned op, const unsigned time);
   void initializeJobSuccessors(Graph &g);
