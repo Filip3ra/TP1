@@ -186,7 +186,7 @@ void JobShopScheduler::gifflerThompson(Graph &dag) const
   }
 }
 
-vector<unsigned> JobShopScheduler::calcStartTimes(Graph &dag)
+vector<unsigned> JobShopScheduler::calcStartTimes(Graph &dag, vector<unsigned>& prev, unsigned & lastOp)
 {
   vector<unsigned> op_to_job;
   vector<unsigned> op_to_mach;
@@ -198,6 +198,8 @@ vector<unsigned> JobShopScheduler::calcStartTimes(Graph &dag)
   makespan = 0;
 
   initAux(op_to_mach, op_to_job);
+  fill(prev.begin(), prev.end(), 0);
+  lastOp = 0;
 
   // Gera a ordenação topologica do dag que representa o schedule gerado
   topo_sort = dag.traverseTopo();
@@ -214,6 +216,7 @@ vector<unsigned> JobShopScheduler::calcStartTimes(Graph &dag)
     if (max > makespan)
     {
       makespan = max;
+      lastOp = op;
     }
 
     // Obtém o sucessor dentro do job da operação op
@@ -223,6 +226,7 @@ vector<unsigned> JobShopScheduler::calcStartTimes(Graph &dag)
     if (next_op && start_times[next_op] < max)
     {
       start_times[next_op] = max;
+      prev[next_op] = op;
     }
 
     // Obtém o sucessor dentro da máquina da operação op
@@ -232,8 +236,10 @@ vector<unsigned> JobShopScheduler::calcStartTimes(Graph &dag)
     if (next_op && start_times[next_op] < max)
     {
       start_times[next_op] = max;
+      prev[next_op] = op;
     }
   }
 
   return start_times;
+}
 }
