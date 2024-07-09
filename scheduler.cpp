@@ -260,3 +260,17 @@ void JobShopScheduler::computeCriticPath(vector<unsigned>& critic, vector<unsign
 
   reverse(critic.begin(), critic.end());
 }
+
+void JobShopScheduler::swap(Graph& dag, unsigned op1, unsigned op2) {
+
+  unsigned prevOp1 = dag.getMachinePrev(op1);
+  unsigned nextOp2 = dag.getMachineSuccessor(op2);
+
+  dag.setOpMachineSuccessor(prevOp1, op2);
+  dag.setOpMachineSuccessor(op2, op1);
+  dag.setOpMachineSuccessor(op1, nextOp2);
+
+  dag.setOpMachinePrev(nextOp2, op1);
+  dag.setOpMachinePrev(op1, op2);
+  dag.setOpMachinePrev(op2, prevOp1);
+}

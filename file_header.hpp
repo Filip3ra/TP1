@@ -48,6 +48,9 @@ private:
   // Recebe o prev e lastOp de uma solução e retorna o caminho critico dessa solução em critic
   void computeCriticPath(vector<unsigned>& critic, vector<unsigned>& prev, unsigned& lastOp);
 
+  // Troca as posições de op1 e op2. Supõe que op1 e op2 estão na mesma máquina.
+  void swap(Graph& dag, unsigned op1, unsigned op2);
+
   // Calcula o tempo mínimo restante para terminar o job j logo antes de ser processado na máquina m
   unsigned calcRemainingTime(unsigned j, unsigned m) const;
 
