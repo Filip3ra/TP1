@@ -45,6 +45,9 @@ private:
   // Calcula os tempos de inicio de cada operação e o makespan se baseando no dag passado como parametro
   vector<unsigned> calcStartTimes(Graph& dag, vector<unsigned>& prev, unsigned& lastOp);
 
+  // Recebe o prev e lastOp de uma solução e retorna o caminho critico dessa solução em critic
+  void computeCriticPath(vector<unsigned>& critic, vector<unsigned>& prev, unsigned& lastOp);
+
   // Calcula o tempo mínimo restante para terminar o job j logo antes de ser processado na máquina m
   unsigned calcRemainingTime(unsigned j, unsigned m) const;
 

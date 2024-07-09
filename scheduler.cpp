@@ -242,4 +242,15 @@ vector<unsigned> JobShopScheduler::calcStartTimes(Graph &dag, vector<unsigned>& 
 
   return start_times;
 }
+
+void JobShopScheduler::computeCriticPath(vector<unsigned>& critic, vector<unsigned>& prev, unsigned& lastOp) {
+
+  critic.clear();
+
+  while (lastOp) {
+    critic.push_back(lastOp);
+    lastOp = prev[lastOp];
+  }
+
+  reverse(critic.begin(), critic.end());
 }
