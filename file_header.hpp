@@ -55,6 +55,8 @@ private:
 
   void generateCandidates(vector<pair<unsigned, unsigned>>& candidates, vector<unsigned>& criticPath);
 
+  void neighbourhoodSearch(Graph& dag, vector<pair<unsigned, unsigned>>& candidates, unsigned& target, vector<unsigned>& prev, unsigned& lastOp);
+
   // Calcula o tempo mínimo restante para terminar o job j logo antes de ser processado na máquina m
   unsigned calcRemainingTime(unsigned j, unsigned m) const;
 
