@@ -66,9 +66,22 @@ void Graph::addInDegree(int b)
   vertice_in_degree[b]++;
 }
 
+void Graph::calcInDegree() {
+
+  fill(vertice_in_degree.begin(), vertice_in_degree.end(), 0);
+
+  for (unsigned i = 1; i < successor_job.size(); ++i) {
+    if (successor_job[i]) vertice_in_degree[successor_job[i]]++;
+    if (successor_machine[i]) vertice_in_degree[successor_machine[i]]++;
+  }
+}
+
 vector<unsigned> Graph::traverseTopo()
 {
   vector<unsigned> result;
+ 
+  calcInDegree();
+
   for (int i = 1; i < N; i++)
   {
     if (vertice_in_degree[i] == 0)

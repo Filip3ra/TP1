@@ -30,6 +30,7 @@ public:
   void setOpTime(const unsigned op, const unsigned time);
   void initializeJobSuccessors(Graph &g);
   void initializeMachineSuccessors(Graph &g);
+  void calcInDegree();
   vector<unsigned> traverseTopo();
   void printSJ();
   void printSM();
