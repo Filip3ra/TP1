@@ -327,4 +327,43 @@ void JobShopScheduler::neighbourhoodSearch(Graph& dag, vector<pair<unsigned, uns
   swap(dag, choosenOp1, choosenOp2);
 }
 
+unsigned JobShopScheduler::localSearch(Graph& dag) {
+
+  vector<unsigned> prev;
+  vector<unsigned> criticPath;
+  vector<pair<unsigned, unsigned>> candidates;
+  unsigned lastOp;
+
+  Graph theDag;
+  unsigned theMakes;
+
+  calcStartTimes(dag, prev, lastOp);
+  theMakes = makespan;
+  theDag = dag;
+
+  while (makespan <= theMakes) {
+
+    computeCriticPath(criticPath, prev, lastOp);
+
+    generateCandidates(candidates, criticPath);
+
+    neighbourhoodSearch(dag, candidates, theMakes, prev, lastOp);
+
+    if (makespan < theMakes) {
+      calcStartTimes(dag, prev, lastOp);
+      theMakes = makespan;
+      theDag = dag;
+    }
+    else {
+      break;
+    }
+  }
+
+  dag = theDag;
+
+  calcStartTimes(dag, prev, lastOp);
+}
+
+unsigned JobShopScheduler::getMakes() const {
+  return makespan;
 }
