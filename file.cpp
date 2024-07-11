@@ -24,6 +24,7 @@ void JobShopScheduler::fileReader(const string &file_name)
   // Abrir o arquivo
   ifstream file(file_name);
 
+
   // Verificar se o arquivo foi aberto corretamente
   if (file.is_open())
   {
@@ -38,7 +39,7 @@ void JobShopScheduler::fileReader(const string &file_name)
         // Processar informações do cabeçalho
         ss >> nb_of_jobs >> nb_of_machines >> time_seed >> machine_seed >> upper_bound >> lower_bound;
       }
-      else if (i >= 3 && i < 18) // linha 3 do arquivo
+      else if (i >= 3 && i < nb_of_jobs+3) // linha 3 do arquivo
       {
         // Processa matriz Times
         vector<int> temp;
@@ -49,7 +50,7 @@ void JobShopScheduler::fileReader(const string &file_name)
         }
         times_matrix.push_back(temp);
       }
-      else if (i >= 19 && i < 35) // linha 19 do arquivo
+      else if (i >= nb_of_jobs + 4 && i < (2*nb_of_jobs+5)) // linha 19 do arquivo
       {
         // Processa matriz Machines
         vector<int> temp;
