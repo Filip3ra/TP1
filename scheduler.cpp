@@ -206,6 +206,7 @@ vector<unsigned> JobShopScheduler::calcStartTimes(Graph &dag, vector<unsigned>& 
   makespan = 0;
 
   initAux(op_to_mach, op_to_job);
+  prev.resize(nb_of_jobs * nb_of_machines + 1);
   fill(prev.begin(), prev.end(), 0);
   lastOp = 0;
 
