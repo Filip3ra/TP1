@@ -282,3 +282,19 @@ void JobShopScheduler::swap(Graph& dag, unsigned op1, unsigned op2) {
   dag.setOpMachinePrev(op1, op2);
   dag.setOpMachinePrev(op2, prevOp1);
 }
+
+void JobShopScheduler::generateCandidates(vector<pair<unsigned, unsigned>>& candidates, vector<unsigned>& criticPath) {
+
+  vector<unsigned> op_to_job;                           // mapeamento de op para job
+  vector<unsigned> op_to_mach;                          // mapeamento de op para maquina
+
+  initAux(op_to_mach, op_to_job);
+  candidates.clear();
+
+  for (unsigned i = 0; i < criticPath.size()-1; ++i) {
+    if (op_to_mach[criticPath[i]] == op_to_mach[criticPath[i + 1]]) {
+      candidates.push_back(pair<unsigned, unsigned>(criticPath[i], criticPath[i + 1]));
+    }
+  }
+}
+}

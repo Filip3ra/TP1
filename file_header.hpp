@@ -16,6 +16,8 @@ public:
   // Imprime limite inferior, makespan obtido e diferença percetual para a instância atual
   void printMakes() const;
 
+  unsigned getMakes() const;
+
 private:
   // Variáveis para armazenar informações do cabeçalho
   int nb_of_jobs;
@@ -50,6 +52,8 @@ private:
 
   // Troca as posições de op1 e op2. Supõe que op1 e op2 estão na mesma máquina e que op2 é sucessora de op1.
   void swap(Graph& dag, unsigned op1, unsigned op2);
+
+  void generateCandidates(vector<pair<unsigned, unsigned>>& candidates, vector<unsigned>& criticPath);
 
   // Calcula o tempo mínimo restante para terminar o job j logo antes de ser processado na máquina m
   unsigned calcRemainingTime(unsigned j, unsigned m) const;
