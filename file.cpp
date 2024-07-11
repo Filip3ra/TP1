@@ -15,6 +15,9 @@ JobShopScheduler::JobShopScheduler(const string &file_name)
 
   gifflerThompson(dag);
 
+  localSearch(dag);
+
+  printMakes();
 
 }
 
