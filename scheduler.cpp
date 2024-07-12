@@ -328,6 +328,11 @@ void JobShopScheduler::neighbourhoodSearch(Graph& dag, vector<pair<unsigned, uns
   swap(dag, choosenOp1, choosenOp2);
 }
 
+void JobShopScheduler::swapResult(vector<Result>& resultsList, unsigned a, unsigned b) {
+  Result aux = resultsList[a];
+  resultsList[a] = resultsList[b];
+  resultsList[b] = aux;
+}
 unsigned JobShopScheduler::localSearch(Graph& dag) {
 
   vector<unsigned> prev;

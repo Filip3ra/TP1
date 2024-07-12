@@ -58,6 +58,9 @@ private:
   void neighbourhoodSearch(Graph& dag, vector<pair<unsigned, unsigned>>& candidates, unsigned& target, vector<unsigned>& prev, unsigned& lastOp);
 
   unsigned localSearch(Graph& dag);
+
+  void swapResult(vector<Result>& resultsList, unsigned a, unsigned b);
+
   
   // Calcula o tempo mínimo restante para terminar o job j logo antes de ser processado na máquina m
   unsigned calcRemainingTime(unsigned j, unsigned m) const;
