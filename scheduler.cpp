@@ -333,6 +333,49 @@ void JobShopScheduler::swapResult(vector<Result>& resultsList, unsigned a, unsig
   resultsList[a] = resultsList[b];
   resultsList[b] = aux;
 }
+
+void JobShopScheduler::fillResultsList(Graph& dag, vector<Result>& resultsList, unsigned& resultsListSize, vector<pair<unsigned, unsigned>>& candidates, vector<unsigned>& prev, unsigned& lastOp) {
+
+  unsigned op1;
+  unsigned op2;
+  bool alreayExists;
+
+  for (unsigned i = 0; i < candidates.size(); ++i) {
+
+    op1 = candidates[i].first;
+    op2 = candidates[i].second;
+
+    swap(dag, op1, op2);
+
+    calcStartTimes(dag, prev, lastOp);
+
+    alreayExists = false;
+    for (unsigned j = 0; j < resultsListSize; ++j) {
+      if (makespan == resultsList[j].makespan) {
+        alreayExists = true;
+        break;
+      }
+    }
+
+    if (resultsListSize < LIST_SIZE && !alreayExists) {
+      resultsList[resultsListSize] = Result{ makespan, dag, false };
+      resultsListSize++;
+    }else if(!alreayExists) {
+      if (makespan < resultsList[resultsListSize - 1].makespan) {
+        resultsList[resultsListSize-1] = Result{ makespan, dag, false };
+      }
+    }
+
+    unsigned j = resultsListSize - 1;
+    while (j > 0 && resultsList[j].makespan < resultsList[j - 1].makespan) {
+      swapResult(resultsList, j, j - 1);
+      --j;
+    }
+
+    swap(dag, op2, op1);
+  }
+}
+
 unsigned JobShopScheduler::localSearch(Graph& dag) {
 
   vector<unsigned> prev;
