@@ -8,6 +8,8 @@
 #include <iostream>
 using namespace std;
 
+#define LIST_SIZE 10
+
 Graph JobShopScheduler::generateDag() const
 {
   // Define número de vértices e arestas do grafo
@@ -381,7 +383,13 @@ unsigned JobShopScheduler::localSearch(Graph& dag) {
   vector<unsigned> prev;
   vector<unsigned> criticPath;
   vector<pair<unsigned, unsigned>> candidates;
+  vector<Result> localSearchList(LIST_SIZE);
+  unsigned localSearchListSize=0;
   unsigned lastOp;
+
+  for (unsigned i = 0; i < localSearchList.size(); ++i) {
+    localSearchList[i].makespan = UINT32_MAX;
+  }
 
   Graph theDag;
   unsigned theMakes;
@@ -389,26 +397,33 @@ unsigned JobShopScheduler::localSearch(Graph& dag) {
   calcStartTimes(dag, prev, lastOp);
   theMakes = makespan;
   theDag = dag;
+  localSearchList[0] = Result{ theMakes, theDag, false };
+  localSearchListSize++;
 
-  while (makespan <= theMakes) {
+  while (true) {
+    bool finishExec = false;
+    for (unsigned i = 0; i < localSearchListSize; ++i) {
+      if (!localSearchList[i].expanded) {
+        dag = localSearchList[i].dag;
+        localSearchList[i].expanded = true;
+        finishExec = true;
+        break;
+      }
+    }
+
+    if (!finishExec) break;
+
+    calcStartTimes(dag, prev, lastOp);
 
     computeCriticPath(criticPath, prev, lastOp);
 
     generateCandidates(candidates, criticPath);
 
-    neighbourhoodSearch(dag, candidates, theMakes, prev, lastOp);
-
-    if (makespan < theMakes) {
-      calcStartTimes(dag, prev, lastOp);
-      theMakes = makespan;
-      theDag = dag;
-    }
-    else {
-      break;
-    }
+    //neighbourhoodSearch(dag, candidates, theMakes, prev, lastOp);
+    fillResultsList(dag, localSearchList, localSearchListSize, candidates, prev, lastOp);
   }
 
-  dag = theDag;
+  dag = localSearchList[0].dag;
 
   calcStartTimes(dag, prev, lastOp);
 }
