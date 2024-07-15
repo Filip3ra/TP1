@@ -8,7 +8,7 @@
 #include <iostream>
 using namespace std;
 
-#define LIST_SIZE 10
+#define LIST_SIZE 100
 
 Graph JobShopScheduler::generateDag() const
 {
