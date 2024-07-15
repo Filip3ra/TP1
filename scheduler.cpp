@@ -301,35 +301,6 @@ void JobShopScheduler::generateCandidates(vector<pair<unsigned, unsigned>>& cand
   }
 }
 
-void JobShopScheduler::neighbourhoodSearch(Graph& dag, vector<pair<unsigned, unsigned>>& candidates, unsigned& target, vector<unsigned>& prev, unsigned& lastOp) {
-
-  unsigned op1;
-  unsigned op2;
-  unsigned choosenMakes = UINT32_MAX;
-  unsigned choosenOp1;
-  unsigned choosenOp2;
-
-  for (unsigned i = 0; i < candidates.size(); ++i) {
-
-    op1 = candidates[i].first;
-    op2 = candidates[i].second;
-
-    swap(dag, op1, op2);
-
-    calcStartTimes(dag, prev, lastOp);
-
-    if (makespan < choosenMakes) {
-      choosenMakes = makespan;
-      choosenOp1 = op1;
-      choosenOp2 = op2;
-    }
-
-    swap(dag, op2, op1);
-  }
-
-  swap(dag, choosenOp1, choosenOp2);
-}
-
 void JobShopScheduler::swapResult(vector<Result>& resultsList, unsigned a, unsigned b) {
   Result aux = resultsList[a];
   resultsList[a] = resultsList[b];

@@ -64,8 +64,6 @@ private:
 
   void generateCandidates(vector<pair<unsigned, unsigned>>& candidates, vector<unsigned>& criticPath);
 
-  void neighbourhoodSearch(Graph& dag, vector<pair<unsigned, unsigned>>& candidates, unsigned& target, vector<unsigned>& prev, unsigned& lastOp);
-
   unsigned localSearch(Graph& dag);
 
   void swapResult(vector<Result>& resultsList, unsigned a, unsigned b);
