@@ -23,8 +23,6 @@ JobShopScheduler::JobShopScheduler(const string &file_name)
 
   setTimeSpent(duration_cast<milliseconds>(high_resolution_clock::now() - startTime).count());
 
-  printMakes();
-
 }
 
 // Função para ler o arquivo e extrair as informações
