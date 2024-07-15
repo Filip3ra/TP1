@@ -24,6 +24,8 @@ public:
 
   unsigned getMakes() const;
 
+  void setTimeSpent(double milliseconds);
+
 private:
   // Variáveis para armazenar informações do cabeçalho
   int nb_of_jobs;
@@ -33,6 +35,7 @@ private:
   int upper_bound;
   int lower_bound;
   unsigned makespan;
+  double millisecondsSpent;
 
   // Matrizes para armazenar Times e Machines
   vector<vector<int>> times_matrix;

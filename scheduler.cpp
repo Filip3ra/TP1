@@ -431,3 +431,7 @@ unsigned JobShopScheduler::localSearch(Graph& dag) {
 unsigned JobShopScheduler::getMakes() const {
   return makespan;
 }
+
+void JobShopScheduler::setTimeSpent(double milliseconds) {
+  millisecondsSpent = milliseconds;
+}
