@@ -2,7 +2,9 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <chrono>
 using namespace std;
+using namespace chrono;
 
 // Construtor
 JobShopScheduler::JobShopScheduler(const string &file_name)
@@ -11,11 +13,15 @@ JobShopScheduler::JobShopScheduler(const string &file_name)
 
   fileReader(file_name);
 
+  high_resolution_clock::time_point startTime = high_resolution_clock::now();
+
   dag = generateDag();
 
   gifflerThompson(dag);
 
   localSearch(dag);
+
+  setTimeSpent(duration_cast<milliseconds>(high_resolution_clock::now() - startTime).count());
 
   printMakes();
 
@@ -108,5 +114,5 @@ void JobShopScheduler::printInfo()
 // Imprime limite inferior, makespan obtido e diferença percetual para a instância atual
 void JobShopScheduler::printMakes() const
 {
-  cout << lower_bound << " " << makespan << " " << (((double)makespan - (double)lower_bound) / (double)lower_bound) * 100 << endl;
+  cout << lower_bound << " " << makespan << " " << (((double)makespan - (double)lower_bound) / (double)lower_bound) * 100 << " " << millisecondsSpent << endl;
 }
