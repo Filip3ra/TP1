@@ -67,8 +67,8 @@ private:
   // Gera os vizinhos se baseando no caminho critico passado como parametro
   void generateCandidates(vector<pair<unsigned, unsigned>>& candidates, vector<unsigned>& criticPath);
 
-  unsigned localSearch(Graph& dag);
   // Recebe um dag e explora iterativamente as vizinhancas dessa solução e salva a melhor solução encontrada
+  void localSearch(Graph& dag);
 
   // Troca o resultado na posição a com o resultado na posição b em resultList
   void swapResult(vector<Result>& resultsList, unsigned a, unsigned b);

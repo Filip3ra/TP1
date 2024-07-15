@@ -349,7 +349,7 @@ void JobShopScheduler::fillResultsList(Graph& dag, vector<Result>& resultsList, 
   }
 }
 
-unsigned JobShopScheduler::localSearch(Graph& dag) {
+void JobShopScheduler::localSearch(Graph& dag) {
 
   vector<unsigned> prev;
   vector<unsigned> criticPath;
