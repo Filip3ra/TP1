@@ -362,13 +362,8 @@ void JobShopScheduler::localSearch(Graph& dag) {
     localSearchList[i].makespan = UINT32_MAX;
   }
 
-  Graph theDag;
-  unsigned theMakes;
-
   calcStartTimes(dag, prev, lastOp);
-  theMakes = makespan;
-  theDag = dag;
-  localSearchList[0] = Result{ theMakes, theDag, false };
+  localSearchList[0] = Result{ makespan, dag, false };
   localSearchListSize++;
 
   while (true) {
