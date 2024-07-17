@@ -112,5 +112,6 @@ void JobShopScheduler::printInfo()
 // Imprime limite inferior, makespan obtido e diferença percetual para a instância atual
 void JobShopScheduler::printMakes() const
 {
-  cout << lower_bound << " " << makespan << " " << (((double)makespan - (double)lower_bound) / (double)lower_bound) * 100 << " " << millisecondsSpent << endl;
+  cout << "lowerbound upperbound makespan desvio_percentual tempo_gasto_ms" << endl;
+  cout << lower_bound << " " << upper_bound << " " << makespan << " " << (((double)makespan - (double)upper_bound) / (double)upper_bound) * 100 << " " << millisecondsSpent << endl;
 }
